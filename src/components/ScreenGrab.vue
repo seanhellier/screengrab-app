@@ -23,9 +23,7 @@
 var crosshairs,
     overlay,
     tooltip;
-
 var TOOLTIP_MARGIN = +window.getComputedStyle(document.querySelector(".tooltip")).margin.split("px")[0];
-
 var screenshot = new Vue({
   
   el: "#screenshot",
@@ -245,20 +243,17 @@ var screenshot = new Vue({
 *:after {
     box-sizing: border-box;
 }
-
 html, body {
   padding: 0;
   margin: 0;
   height: 100%;
 }
-
 .overlay,
 .crosshairs,
 .tooltip,
 .borderedBox {
   user-select: none;
 }
-
 .overlay {
   position: fixed;
   top: 0;
@@ -267,25 +262,20 @@ html, body {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 .overlay.highlighting {
   background: none;
   border-color: rgba(0, 0, 0, 0.5);
   border-style: solid;
 }
-
 .crosshairs {
   height: 100%;
   position: absolute;
   width: 100%;
   z-index: 2147483645;
 }
-
 .crosshairs.hidden {
   display: none;
 }
-
-
 .crosshairs::before,
 .crosshairs::after {
   content: "";
@@ -295,21 +285,18 @@ html, body {
   border: none !important;
   border-image:  !important;
 }
-
 .crosshairs::before {
   left: -100%;
   top: -100%;
   border-right: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
-
 .crosshairs::after {
   left: 0px;
   top: 0px;
   border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-left: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
-
 .container {
   clear: both;
   overflow: hidden;
@@ -319,16 +306,13 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
 .borderedBox {
   border: 1px solid #fff;
   position: absolute;
 }
-
 .borderedBox.hidden {
   display: none;
 }
-
 .tooltip {
   
   display: inline-block;
@@ -346,11 +330,9 @@ html, body {
   margin: 6px;
   white-space: nowrap;
 }
-
 .tooltip.hidden {
   display: none;
 }
-
 .Flash {
   position: absolute;
   width: 100%;
@@ -370,20 +352,16 @@ html, body {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
-
 .screenshot-enter-active, .screenshot-leave-active {
   transition: opacity .2s;
 }
-
 .screenshot-enter, .screenshot-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 @keyframes fade-out {
   from {
     opacity: 1;
   }
-
   to {
     opacity: 0;
   }
