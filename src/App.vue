@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Screenshot />
   </div>
 </template>
 
 <script>
-import screenshot from './components/ScreenGrab.vue'
+import Screenshot from './components/ScreenGrab.vue'
 
 export default {
   name: 'App',
   components: {
-    screenshot
+    Screenshot
   }
 }
 </script>
