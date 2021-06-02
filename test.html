@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>screenshot test</title>
+        <meta
+            name="description"
+            content="Here is the demo for the quick tip to take screenshot of the webpage using HTML5 and JavaScript."
+        />
+        <meta name="author" content="Avinash Zala" />
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+            crossorigin="anonymous"
+        />
+        <style type="text/css">
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+        <link href="local.css" rel="stylesheet" />
+
+        <link rel="shortcut icon" href="http://static.xpertdeveloper.com/uploads/2012/02/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Junge" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://www.xpertdeveloper.com">test link</a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="http://www.xpertdeveloper.com/about/">About</a></li>
+                            <li><a href="http://www.xpertdeveloper.com/contact/">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="hero-unit holder">
+                <h1>Take Web Page Screenshot</h1>
+                <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/IaJqMcOMuDM"
+                    title="YouTube video player"
+                    frameborder="0"
+                ></iframe>
+            </div>
+            <div class="hero-unit holder">
+                <p>This is the dummy text which we can see in the generated Screenshot.</p>
+                <p>
+                    <a
+                        class="btn btn-success"
+                        href="http://www.xpertdeveloper.com/2012/10/webpage-screenshot-with-html5-js"
+                        >Back to Article &raquo;</a
+                    >
+                </p>
+                <p>
+                    <a class="btn btn-success" href="javascript:void(0);" onClick="generate();"
+                        >Generate Screenshot &raquo;</a
+                    >
+                </p>
+            </div>
+
+            <hr />
+            <footer>
+                <p>&copy; Expert Developer 2012</p>
+            </footer>
+        </div>
+
+        <img src="http://whos.amung.us/widget/bgwa11737i61.png" width="81" height="29" border="0" />
+        <script type="text/javascript">
+            (function (exports) {
+                function urlsToAbsolute(nodeList) {
+                    if (!nodeList.length) {
+                        return [];
+                    }
+                    var attrName = 'href';
+                    if (
+                        nodeList[0].__proto__ === HTMLImageElement.prototype ||
+                        nodeList[0].__proto__ === HTMLScriptElement.prototype
+                    ) {
+                        attrName = 'src';
+                    }
+                    nodeList = [].map.call(nodeList, function (el, i) {
+                        var attr = el.getAttribute(attrName);
+                        if (!attr) {
+                            return;
+                        }
+                        var absURL = /^(https?|data):/i.test(attr);
+                        if (absURL) {
+                            return el;
+                        } else {
+                            return el;
+                        }
+                    });
+                    return nodeList;
+                }
+
+                function screenshotPage() {
+                    urlsToAbsolute(document.images);
+                    urlsToAbsolute(document.querySelectorAll("link[rel='stylesheet']"));
+                    var screenshot = document.documentElement.cloneNode(true);
+                    var b = document.createElement('base');
+                    b.href = document.location.protocol + '//' + location.host;
+                    var head = screenshot.querySelector('head');
+                    head.insertBefore(b, head.firstChild);
+                    screenshot.style.pointerEvents = 'none';
+                    screenshot.style.overflow = 'hidden';
+                    screenshot.style.webkitUserSelect = 'none';
+                    screenshot.style.mozUserSelect = 'none';
+                    screenshot.style.msUserSelect = 'none';
+                    screenshot.style.oUserSelect = 'none';
+                    screenshot.style.userSelect = 'none';
+                    screenshot.dataset.scrollX = window.scrollX;
+                    screenshot.dataset.scrollY = window.scrollY;
+                    var script = document.createElement('script');
+                    script.textContent = '(' + addOnPageLoad_.toString() + ')();';
+                    screenshot.querySelector('body').appendChild(script);
+                    var blob = new Blob([screenshot.outerHTML], {
+                        type: 'text/html',
+                    });
+                    return blob;
+                }
+
+                function addOnPageLoad_() {
+                    window.addEventListener('DOMContentLoaded', function (e) {
+                        var scrollX = document.documentElement.dataset.scrollX || 0;
+                        var scrollY = document.documentElement.dataset.scrollY || 0;
+                        window.scrollTo(scrollX, scrollY);
+                    });
+                }
+
+                function generate() {
+                    window.URL = window.URL || window.webkitURL;
+                    window.open(window.URL.createObjectURL(screenshotPage()));
+                }
+                exports.screenshotPage = screenshotPage;
+                exports.generate = generate;
+            })(window);
+        </script>
+    </body>
+</html>

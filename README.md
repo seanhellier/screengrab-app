@@ -1,4 +1,4 @@
-# screengrab-app
+# screen-grab-converter-test
 
 ## Project setup
 ```

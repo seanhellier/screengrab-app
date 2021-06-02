@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Screengrab App</title>
+		<link rel="stylesheet" href="./style.css" />
+	</head>
+	<body>
+		<div
+			id="screenshot"
+			class="container"
+			@mousemove="move"
+			@mousedown="mouseDown"
+			@mouseup="mouseUp"
+		>
+			<transition name="screenshot">
+				<div class="Flash" v-if="tookScreenShot"></div>
+			</transition>
+
+			<div
+				class="overlay"
+				:class="{ 'highlighting' : mouseIsDown }"
+				:style="{ borderWidth: borderWidth }"
+			></div>
+
+			<div
+				class="crosshairs"
+				:class="{ 'hidden' : isDragging }"
+				:style="{ left: crossHairsLeft + 'px', top: crossHairsTop + 'px' }"
+			></div>
+
+			<div
+				class="borderedBox"
+				:class="{ 'hidden': !isDragging }"
+				:style="{ left: boxLeft + 'px', top: boxTop + 'px', width: boxEndWidth + 'px', height: boxEndHeight + 'px' }"
+			></div>
+
+			<span
+				class="tooltip"
+				:class="{ 'hidden': !isDragging }"
+				:style="{ left: toolTipLeft + 'px', top: toolTipTop + 'px'}"
+				>{{boxEndWidth}} x {{boxEndHeight}}px</span
+			>
+		</div>
+		<!-- partial -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+		<script src="./script.js"></script>
+	</body>
+</html>
